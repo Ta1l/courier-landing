@@ -129,20 +129,20 @@ ls -la dist/
 
 ### 1. BOT_LINK (Telegram-бот)
 
-Бот уже настроен на `@lavka_courier_auth_bot`. Если нужно изменить:
+Бот уже настроен на `@kurer_pro_bot`. Если нужно изменить:
 
 **Файл `src/config.ts`** — основной конфиг:
 ```typescript
 export const CONFIG = {
-  BOT_LINK: "https://t.me/lavka_courier_auth_bot?start=",
-  // Замените lavka_courier_auth_bot на имя вашего бота
+  BOT_LINK: "https://t.me/kurer_pro_bot?start=",
+  // Замените kurer_pro_bot на имя вашего бота
 };
 ```
 
 **Файл `config.json`** — справочный конфиг:
 ```json
 {
-  "BOT_LINK": "tg://resolve?domain=lavka_courier_auth_bot&start=SOURCE_PLACEHOLDER"
+  "BOT_LINK": "tg://resolve?domain=kurer_pro_bot&start=SOURCE_PLACEHOLDER"
 }
 ```
 
@@ -150,7 +150,7 @@ export const CONFIG = {
 
 ### 2. Аналитика
 
-Откройте `index.html` (в корне проекта, НЕ в dist/):
+Откройте `vie/index.html` (исходный шаблон, НЕ `dist/index.html`):
 
 **Google Analytics 4:**
 Найдите закомментированный блок `GA4 Placeholder` и раскомментируйте его, заменив `G-XXXXXXXXXX` на ваш Measurement ID.
@@ -597,28 +597,23 @@ sudo ufw allow 443/tcp
 
 ```
 courier-landing/
-├── index.html              ← HTML с meta, OG, JSON-LD, аналитика
-├── config.json             ← Конфигурация (справочный файл)
-├── README.md               ← Эта инструкция
-├── package.json            ← Зависимости
-├── vite.config.ts          ← Конфиг сборщика Vite
-├── tsconfig.json           ← Конфиг TypeScript
-├── deploy.sh               ← Скрипт деплоя (после создания)
-├── src/
-│   ├── App.tsx             ← Главный компонент лендинга
-│   ├── config.ts           ← BOT_LINK и UTM логика
-│   ├── index.css           ← Стили (Tailwind + кастомные)
-│   ├── main.tsx            ← Точка входа React
-│   └── utils/cn.ts         ← Утилита для классов
-├── public/
-│   ├── robots.txt          ← Для поисковых роботов
-│   ├── sitemap.xml         ← Карта сайта (замените домен!)
-│   ├── _redirects          ← Для Netlify
-│   └── assets/icons/
-│       └── bike-e.svg      ← SVG-иконка электровелосипеда
-└── dist/                   ← Собранный проект (после npm run build)
-    ├── index.html          ← Единственный файл для хостинга
-    ├── robots.txt
-    ├── sitemap.xml
-    └── assets/
+├── package.json            ← Корневые скрипты-обёртки (`npm run build`, `npm run dev`)
+├── tg/                     ← Telegram-бот (aiogram + SQLite)
+├── vie/
+│   ├── package.json        ← Фронтенд-зависимости
+│   ├── vite.config.ts      ← Конфиг Vite
+│   ├── index.html          ← HTML шаблон с мета и аналитикой
+│   ├── src/
+│   │   ├── App.tsx         ← Главный компонент лендинга
+│   │   ├── config.ts       ← BOT_LINK и UTM логика
+│   │   ├── index.css       ← Стили (Tailwind + кастомные)
+│   │   ├── main.tsx        ← Точка входа React
+│   │   └── utils/cn.ts     ← Утилита для классов
+│   └── public/
+│       ├── robots.txt      ← Для поисковых роботов
+│       ├── sitemap.xml     ← Карта сайта (замените домен!)
+│       ├── _redirects      ← Для Netlify
+│       └── assets/icons/
+│           └── bike-e.svg  ← SVG-иконка электровелосипеда
+└── dist/                   ← Результат `npm run build` (готово для хостинга)
 ```
